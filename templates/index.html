@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MDP 行動-評估示範</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body>
+    <div class="bg-shape shape-a"></div>
+    <div class="bg-shape shape-b"></div>
+
+    <main class="app-shell">
+        <header class="hero">
+            <h1>馬可夫決策流程展示</h1>
+            <p>設定格子世界、隨機產生策略箭頭，並用評估值找出高分路徑。</p>
+        </header>
+
+        <section class="panel input-panel">
+            <div class="field-row">
+                <label for="gridSize">輸入 n（3 到 10）</label>
+                <input id="gridSize" type="number" min="3" max="10" value="5" />
+                <button id="buildGridBtn" type="button">建立表格</button>
+            </div>
+            <div class="field-row compact">
+                <span class="hint">先選擇模式，再點擊格子設定內容</span>
+                <span id="obstacleCounter" class="hint strong">障礙物：0 / 3</span>
+            </div>
+        </section>
+
+        <section class="panel tools-panel">
+            <div class="tool-group" id="modeSelector">
+                <button class="mode-btn active" data-mode="start">起點</button>
+                <button class="mode-btn" data-mode="end">終點</button>
+                <button class="mode-btn" data-mode="obstacle">障礙物</button>
+                <button class="mode-btn" data-mode="erase">清除</button>
+            </div>
+            <div class="action-buttons">
+                <button id="generatePolicyBtn" class="cta" type="button">生成行動與評估</button>
+                <button id="ensurePathBtn" class="ensure-cta" type="button">隨機生成直到有路徑</button>
+                <button id="actionScoreBtn" class="secondary-cta" type="button">計算四向分數</button>
+            </div>
+        </section>
+
+        <section class="panel grid-panel">
+            <div id="gridContainer" class="grid-container" aria-live="polite"></div>
+        </section>
+
+        <section class="panel result-panel">
+            <div class="result-head">
+                <h2>結果資訊</h2>
+                <div class="score-board">
+                    <span class="score-title">前三高分</span>
+                    <div id="topScores" class="top-scores">尚未計算</div>
+                </div>
+            </div>
+            <div id="pathPreview" class="path-preview">移動到分數上可查看路徑。</div>
+            <p id="statusText">請先建立表格並設定起點、終點與障礙物。</p>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>
