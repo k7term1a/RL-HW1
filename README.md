@@ -2,10 +2,6 @@
 
 馬可夫決策過程 (MDP) 的「行動-評估」互動式展示專案。
 
-## 線上展示
-
-- Streamlit: https://k7rlhw1.streamlit.app
-
 ## 功能
 
 - 輸入 `n` (`3` 到 `10`) 建立 `n x n` 網格

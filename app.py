@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import os
 import random
-import sys
 from typing import Dict, List, Optional, Set, Tuple
 
 from flask import Flask, jsonify, render_template, request
@@ -269,26 +267,4 @@ def api_generate():
 
 
 if __name__ == "__main__":
-    # Streamlit executes target scripts as __main__; avoid starting Flask's server there.
-    running_in_streamlit = any("streamlit" in arg.lower() for arg in sys.argv) or bool(
-        os.getenv("STREAMLIT_SERVER_PORT")
-    )
-
-    if running_in_streamlit:
-        try:
-            import streamlit as st  # type: ignore
-
-            st.set_page_config(page_title="RL-HW1", page_icon="🧭")
-            st.title("RL-HW1")
-            st.warning(
-                "目前偵測到是 Streamlit 執行環境，已跳過 Flask app.run()，避免 reloader signal 錯誤。"
-            )
-            st.info(
-                "此專案主程式為 Flask。若要完整使用目前互動介面，請用 `python app.py` 啟動。"
-            )
-        except Exception:
-            pass
-    else:
-        port = int(os.getenv("PORT", "5000"))
-        debug = os.getenv("FLASK_DEBUG", "0") == "1"
-        app.run(host="0.0.0.0", port=port, debug=debug, use_reloader=False)
+    app.run(debug=True)
