@@ -133,7 +133,7 @@ function setHighlightedPathState(pathIndex) {
 function renderTopScores() {
     if (!state.topPaths.length) {
         topScores.textContent = "目前沒有可顯示的路徑。";
-        pathPreview.textContent = "移動到分數上可查看路徑。";
+        setHighlightedPathState(-1);
         return;
     }
 
@@ -149,7 +149,7 @@ function renderTopScores() {
             paintGrid();
         };
         const deactivate = () => {
-            setHighlightedPathState(-1);
+            setHighlightedPathState(0);
             paintGrid();
         };
 
@@ -160,6 +160,8 @@ function renderTopScores() {
 
         topScores.appendChild(scoreBtn);
     });
+
+    setHighlightedPathState(0);
 }
 
 function createCellElement(r, c) {
